@@ -84,4 +84,7 @@ public class Team extends Model {
         return logo_url;
     }
 
+    public User getUserOfTeam(long user_id) {
+        return User.find("SELECT u FROM User u WHERE u.id = ?", user_id).first();
+    }
 }

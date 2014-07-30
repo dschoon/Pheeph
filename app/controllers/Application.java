@@ -46,8 +46,8 @@ public class Application extends Controller {
 
         List<Game> games = GameController.getGamesByTeamId(team_id);
 
-        String title = currentTeam.getName() +"'s Schedule";
+        String title = currentTeam.getName();
 
-        render(title, user, userModel, userTeam, games);
+        render(title, user, userModel, userTeam, games, currentTeam);
     }
 }

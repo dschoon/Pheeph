@@ -9,8 +9,6 @@
 
 <div class="row">
    <div class="col-md-12">
-        #{list items:games, as:'game'}
-        #{if game.home_team_id != 0 & game.away_team_id != 0}
             <table class="table" style="margin:10px 0 10px 0; text-align:center;">
                 <thead>
                 <tr>
@@ -20,21 +18,23 @@
                     <th><center>RESULT</center></th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>${game.week}</td>
-                    <td>${game.getTeamById(game.home_team_id).name}</td>
-                    <td>${game.getTeamById(game.away_team_id).name}</td>
-                    #{if game.home_team_id != 0 && game.away_team_id != 0}
-                        <td>BUTTON</td>
+                #{list items:games, as:'game'}
+                    #{if game.home_team_id != 0 & game.away_team_id != 0}
+                    <tbody>
+                    <tr>
+                        <td>${game.week}</td>
+                        <td>${game.getTeamById(game.home_team_id).name}</td>
+                        <td>${game.getTeamById(game.away_team_id).name}</td>
+                        #{if game.home_team_id != 0 && game.away_team_id != 0}
+                            <td>BUTTON</td>
+                        #{/if}
+                        #{else}
+                            <td>--</td>
+                        #{/else}
+                    </tr>
+                    </tbody>
                     #{/if}
-                    #{else}
-                        <td>--</td>
-                    #{/else}
-                </tr>
-                </tbody>
+                #{/list}
             </table>
-        #{/if}
-        #{/list}
     </div>
 </div>

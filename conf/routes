@@ -1,0 +1,32 @@
+#########################################################################
+#                       Random Stuff
+#########################################################################
+
+# Home page
+GET     /                                       Application.home
+GET     /schedule                               Application.schedule
+GET     /schedule/{team_id}                     Application.userSchedule
+
+# Login
+*       /auth                                   module:securesocial
+
+# Administration
+*       /admin                                  module:crud
+
+
+
+#########################################################################
+#                       Random Stuff
+#########################################################################
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}
+
+# Import CRUD routes
+*      /admin                                   module:crud

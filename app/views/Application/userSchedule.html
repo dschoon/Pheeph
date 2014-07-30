@@ -1,0 +1,40 @@
+#{extends 'Application/index.html'/}
+#{set title: title /}
+
+<style xmlns="http://www.w3.org/1999/html">
+    td .p {
+        font-size:10px;
+    }
+</style>
+
+<div class="row">
+   <div class="col-md-12">
+        #{list items:games, as:'game'}
+        #{if game.home_team_id != 0 & game.away_team_id != 0}
+            <table class="table" style="margin:10px 0 10px 0; text-align:center;">
+                <thead>
+                <tr>
+                    <th><center>WEEK</center></th>
+                    <th><center>HOME</center></th>
+                    <th><center>AWAY</center></th>
+                    <th><center>RESULT</center></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>${game.week}</td>
+                    <td>${game.getTeamById(game.home_team_id).name}</td>
+                    <td>${game.getTeamById(game.away_team_id).name}</td>
+                    #{if game.home_team_id != 0 && game.away_team_id != 0}
+                        <td>BUTTON</td>
+                    #{/if}
+                    #{else}
+                        <td>--</td>
+                    #{/else}
+                </tr>
+                </tbody>
+            </table>
+        #{/if}
+        #{/list}
+    </div>
+</div>

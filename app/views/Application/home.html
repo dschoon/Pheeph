@@ -1,0 +1,42 @@
+#{extends 'Application/index.html'/}
+#{set title: title /}
+
+<div class="panel panel-default" style="width:940px;">
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>RANK</th>
+            <th>NAME</th>
+            <th>W</th>
+            <th>L</th>
+            <th>D</th>
+            <th>PTS</th>
+            <th>PPM</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>GD</th>
+        </tr>
+        </thead>
+        <tbody>
+            #{list items:teams, as:'team'}
+            #{if team.getTeamById(teamStats.get(team_index-1).team_id).id != 0}
+                <tr #{if userModel.id == team.getTeamById(teamStats.get(team_index-1).team_id).user_id } style="background-color:#fff6d9" #{/if} >
+                    <td><img src="${team.getTeamById(teamStats.get(team_index-1).team_id).logo_url}" width="15px"/></td>
+                    <td>${team_index}</td>
+                    <td><a href="/schedule/${team.getTeamById(teamStats.get(team_index-1).team_id).id}">${team.getTeamById(teamStats.get(team_index-1).team_id).name}</a></td>
+                    <td>${teamStats.get(team_index-1).wins}</td>
+                    <td>${teamStats.get(team_index-1).losses}</td>
+                    <td>${teamStats.get(team_index-1).draws}</td>
+                    <td>${teamStats.get(team_index-1).points}</td>
+                    <td>${teamStats.get(team_index-1).pointsPerMatch}</td>
+                    <td>${teamStats.get(team_index-1).goalsFor}</td>
+                    <td>${teamStats.get(team_index-1).goalsAgainst}</td>
+                    <td>${teamStats.get(team_index-1).goalDifferential}</td>
+                </tr>
+            #{/if}
+            #{/list}
+        </tbody>
+    </table>
+
+</div>

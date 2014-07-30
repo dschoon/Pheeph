@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>#{get 'title' /}</title>
+    <meta charset="${_response_encoding}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="@{'/public/bootstrap/css/bootstrap.min.css'}">
+    <link rel="stylesheet" href="@{'/public/css/flat-ui.css'}" >
+
+#{get 'moreStyles' /}
+    <style xmlns="http://www.w3.org/1999/html">
+        body {
+            background-color: #2C3E50;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        a {
+            color: #2C3E50;
+        }
+        #avatar {
+            border-color: #2C3E50;
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 5px;
+        }
+    </style>
+#{get 'moreScripts' /}
+</head>
+<body>
+
+    <div class="container" style="padding-top:20px;">
+        <div>
+            <div class="col-md-12">
+                <div class="jumbotron span5" style="background-color:#FFF;">
+                    <center>
+                        <h1>${title}</h1>
+                    </center>
+                </div>
+            </div>
+
+            <div class="col-md-12" style="margin-top:-25px;">
+                <div class="jumbotron" style="background-color:#FFF; min-height:800px;">
+                    <ul class="nav nav-pills" style="margin-top:20px;">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="/schedule">Schedule</a></li>
+                    </ul>
+                    <div style="margin-top:60px;">
+                        <p style="float:right; margin:-100px 0 0 -60px;">
+                            <a href="#" data-toggle="modal" data-target="#profile" >
+                                <img src="${user.avatarUrl}" id="avatar" />
+                            </a>
+                        </p>
+
+                        #{doLayout /}
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="profile">
+                <div class="modal-dialog" style="margin-left:0px; margin-top:200px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                            <center><h4 class="modal-title">Profile</h4></center>
+                        </div>
+                        <div class="modal-body">
+                            <img src="http://graph.facebook.com/${user.id.id}/picture?type=large" style="float:right; width:80px; margin-right:30px;">
+                            <p>Name: <input type="text" value="${userModel.name}" style="width:350px; margin-left:8px;"></p>
+                            <p>Email: <input type="text" value="${userModel.email}" style="width:353px; margin-left:8px;"></p>
+                            <p>Team: <input type="text" value="${userTeam.name}" style="width:353px; margin-left:8px;" readonly></p>
+                        </div>
+                        <div class="modal-footer" style="height:50px;">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="height:40px; margin-top:-12px;">Close</button>
+                            <button type="button" class="btn btn-primary" style="height:40px; margin-top:-12px;">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="addGame">
+                <div class="modal-dialog" style="margin-left:-300px; margin-top:300px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                            <center><h4 class="modal-title">Add Game Results</h4></center>
+                        </div>
+                        <div class="modal-body">
+                            <p>Home Team:
+                                <select style="margin-left:10px;">
+                                    #{list items:teams, as:'team'}
+                                        <option type="text" value="${team.id}">${team.name}</option>
+                                    #{/list}
+                                </select>
+                            </p>
+                            <p>Away Team:
+                                <select style="margin-left:10px;">
+                                    #{list items:teams, as:'team'}
+                                        <option type="text" value="${team.id}">${team.name}</option>
+                                    #{/list}
+                                </select>
+                            </p>
+                        </div>
+                        <div class="modal-footer" style="height:50px;">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="height:40px; margin-top:-12px;">Close</button>
+                            <button type="button" class="btn btn-primary" style="height:40px; margin-top:-12px;">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="@{'/public/js/jquery-ui-1.10.3.custom.min.js'}"></script>
+    <script src="@{'/public/js/jquery.ui.touch-punch.min.js'}"></script>
+    <script src="@{'/public/js/bootstrap.min.js'}"></script>
+    <script src="@{'/public/js/bootstrap-select.js'}"></script>
+    <script src="@{'/public/js/bootstrap-switch.js'}"></script>
+    <script src="@{'/public/js/flatui-checkbox.js'}"></script>
+    <script src="@{'/public/js/flatui-radio.js'}"></script>
+    <script src="@{'/public/js/jquery.tagsinput.js'}"></script>
+    <script src="@{'/public/js/jquery.placeholder.js'}"></script>
+    <script src="http://vjs.zencdn.net/4.3/video.js"></script>
+    <script src="@{'/public/js/application.js'}"></script>
+</body>
+</html>

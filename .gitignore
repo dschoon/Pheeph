@@ -13,5 +13,6 @@ test-result
 server.pid
 *.iml
 *.eml
+*.iws
 /dist/
 .cache

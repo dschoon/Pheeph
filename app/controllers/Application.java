@@ -21,7 +21,7 @@ public class Application extends Controller {
         List<Team> teams = Team.findAll();
         List<TeamStats> teamStats = TeamStats.getByRank();
 
-        renderArgs.put("userTeam",TeamController.getTeamByUserId(userModel.id));
+        renderArgs.put("userTeam", TeamController.getTeamByUserId(userModel.id));
 
         render(title, user, userModel, teams, teamStats);
     }

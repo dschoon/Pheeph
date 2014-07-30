@@ -69,7 +69,9 @@
                             <img src="http://graph.facebook.com/${user.id.id}/picture?type=large" style="float:right; width:80px; margin-right:30px;">
                             <p>Name: <input type="text" value="${userModel.name}" style="width:350px; margin-left:8px;"></p>
                             <p>Email: <input type="text" value="${userModel.email}" style="width:353px; margin-left:8px;"></p>
-                            <p>Team: <input type="text" value="${userTeam.name}" style="width:353px; margin-left:8px;" readonly></p>
+                            #{if userTeam.name}
+                                <p>Team: <input type="text" value="${userTeam.name}" style="width:353px; margin-left:8px;" readonly></p>
+                            #{/if}
                         </div>
                         <div class="modal-footer" style="height:50px;">
                             <button type="button" class="btn btn-default" data-dismiss="modal" style="height:40px; margin-top:-12px;">Close</button>

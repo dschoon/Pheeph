@@ -105,6 +105,10 @@ public class Game extends Model {
         return played;
     }
 
+    public static Game getGameById(long game_id) {
+        return Game.find("SELECT g FROM Game g WHERE g.id = ?", game_id).first();
+    }
+
     public static Team getTeamById(long team_id) {
         return Team.find("SELECT t FROM Team t WHERE t.id = ?", team_id).first();
     }

@@ -5,7 +5,11 @@
 # Home page
 GET     /                                       Application.home
 GET     /schedule                               Application.schedule
-GET     /schedule/{team_id}                     Application.userSchedule
+GET     /team/{team_id}                         Application.teamSchedule
+
+#Game Results
+GET     /game/{game_id}                         Application.gameResult
+GET     /game/{game_id}/set                     Application.setGameResult
 
 # Login
 *       /auth                                   module:securesocial

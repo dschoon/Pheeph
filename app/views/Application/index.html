@@ -32,10 +32,10 @@
 
     <div class="container" style="padding-top:20px;">
         <div>
-            <div class="col-md-12">
+            <div id="titleDiv" class="col-md-12">
                 <div class="jumbotron span5" style="background-color:#FFF;">
                     <center>
-                        <h1><a href="/">${title}</a></h1>
+                        <h1 id="title"><a href="/">${title}</a></h1>
                     </center>
                 </div>
             </div>
@@ -43,15 +43,15 @@
             <div class="col-md-12" style="margin-top:-25px;">
                 <div class="jumbotron" style="background-color:#FFF; min-height:800px;">
                     <ul class="nav nav-pills" style="margin-top:20px;">
-                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li><a href="/schedule">Schedule</a></li>
                     </ul>
                     <div style="margin-top:60px;">
-                        <!-- <p style="float:right; margin:-100px 0 0 -60px;">
-                            <a href="#" data-toggle="modal" data-target="#profile" >
-                                <img src="${user.avatarUrl}" id="avatar" />
-                            </a>
-                        </p> -->
+                        <p style="float:right; margin:-100px 0 0 -60px;">
+                            #{if userTeam != null}
+                                <a href="/team/${userTeam.id}"><button type="btn" class="btn btn-primary">My Team</button></a>
+                            #{/if}
+                        </p>
                         #{doLayout /}
                     </div>
                 </div>
@@ -74,8 +74,7 @@
                         </div>
                         <div class="modal-footer" style="height:50px;">
                             <button type="button" class="btn btn-default" data-dismiss="modal" style="height:40px; margin-top:-12px;">Close</button>
-                            <button type="button" class="btn btn-primary" style="height:40px; margin-top:-12px;">Save changes</button>
-                        </div>
+ v                        </div>
                     </div>
                 </div>
             </div>

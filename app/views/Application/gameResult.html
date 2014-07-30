@@ -1,0 +1,68 @@
+#{extends 'Application/index.html'/}
+#{set title: title /}
+
+<style xmlns="http://www.w3.org/1999/html">
+    #title {
+        font-size:50px;
+    }
+    td .p {
+        font-size:10px;
+    }
+</style>
+
+#{if !currentGame.played && userModel.isAdmin}
+    <div class="row" style="margin-top:60px;">
+       <div class="col-md-6">
+            <center><img src="${homeTeam.logo_url}" style="width:150px;"></center>
+        </div>
+        <div class="col-md-6">
+            <center><img src="${awayTeam.logo_url}" style="width:150px;"></center>
+        </div>
+    </div>
+    <div class="row" style="margin-top:30px;">
+        <div class="col-md-6">
+            <center><input id="home_score" type="text" style="height:100px; width:100px; text-align:center; font-size:70px;"></center>
+        </div>
+        <div class="col-md-6">
+            <center><input id="away_score" type="text" style="height:100px; width:100px; text-align:center; font-size:70px;"></center>
+        </div>
+    </div>
+    <div class="row" style="margin-top:60px;">
+        <center><button type="btn" class="btn btn-inverse" onclick="saveResult()" style="height:50px; width:100px; font-size:30px;">Save</button></center>
+    </div>
+#{/if}
+#{else}
+    <div class="row" style="margin-top:60px;">
+        <div class="col-md-6">
+            <center><img src="${homeTeam.logo_url}" style="width:150px;"></center>
+        </div>
+        <div class="col-md-6">
+            <center><img src="${awayTeam.logo_url}" style="width:150px;"></center>
+        </div>
+    </div>
+    <div class="row" style="margin-top:60px;">
+        <div class="col-md-6">
+            <center><h1>${currentGame.home_score}</h1></center>
+        </div>
+        <div class="col-md-6">
+            <center><h1>${currentGame.away_score}</h1></center>
+        </div>
+    </div>
+#{/else}
+
+<script type="text/javascript">
+    saveResult = function() {
+        var $homeScore = $("#home_score").val();
+        var $awayScore = $("#away_score").val();
+
+        $.ajax({
+            "url": "@{Application.setGameResult}",
+            "dataType": "JSON",
+            "data": {"game_id":"${currentGame.id}", "home_score": $homeScore, "away_score": $awayScore},
+            "type": "GET",
+            "success": function (data) {
+                location.reload(true);
+            }
+        });
+    }
+</script>

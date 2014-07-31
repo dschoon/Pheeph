@@ -20,7 +20,7 @@ import java.util.List;
 public class Application extends Controller {
 
     public static void home() {
-        String title = "Standings";
+        String title = "Lithium Premier League";
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
         List<Team> teams = Team.findAll();
@@ -32,7 +32,7 @@ public class Application extends Controller {
     }
 
     public static void schedule() {
-        String title = "Schedule";
+        String title = "League Schedule";
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
         List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(16);
@@ -93,5 +93,14 @@ public class Application extends Controller {
                                                 currentGame.home_score, currentGame.away_score);
 
         renderJSON("[{ \"result\":\"SUCCESS\" }]");
+    }
+
+
+
+
+
+
+    public static void FourOhFour() {
+        render("errors/404.html");
     }
 }

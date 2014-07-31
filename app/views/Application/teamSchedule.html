@@ -49,3 +49,9 @@
             </table>
     </div>
 </div>
+
+#{if currentTeam.user_id == userModel.id}
+    <div class="row" style="margin-top:120px; float:right;">
+        <p style="font-size:12px; font-weight:bold;"><a href="@{securesocial.SecureSocial.logout}">Logout</a></p>
+    </div>
+#{/if}

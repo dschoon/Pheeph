@@ -2,18 +2,29 @@
 
 <html>
     <head>
-        <title>Not found</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=${_response_encoding}"/>    
+        <title>Whoops!</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=${_response_encoding}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="@{'/public/bootstrap/css/bootstrap.min.css'}">
+        <link rel="stylesheet" href="@{'/public/css/flat-ui.css'}" >
+
+        <style xmlns="http://www.w3.org/1999/html">
+            body {
+                background-color: #2C3E50;
+            }
+        </style>
     </head>
     <body>
-        #{if play.mode.name() == 'DEV'}
+        #{if play.mode.name() == 'PROD'}
             #{404 result /}
         #{/if}
         #{else}
-            <h1>Not found</h1>
-            <p>
-                ${result.message}
-            </p>
+            <center>
+                <h1 style="color:#fff; margin-top:100px;">Nothing to see here...</h1>
+                <img src="http://storage.coolfeed.co/2012/10/Hilarious-soccer-dives-12-GIFs-coolfeed.co-1.gif" height="500px" style="margin-top:50px;">
+                <p style="color:#fff; margin-top:50px;">just go back where you came from</p>
+            </center>
         #{/else}
     </body>
 </html>

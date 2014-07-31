@@ -69,10 +69,6 @@ public class TeamStats extends Model {
         this.wins = wins;
     }
 
-    public void addWin() {
-        this.wins++;
-    }
-
     public long getWins() {
         return wins;
     }
@@ -82,21 +78,13 @@ public class TeamStats extends Model {
         this.losses = losses;
     }
 
-    public void addLoss() {
-        this.losses++;
-    }
-
     public long getLosses() {
         return losses;
     }
 
 
-    public void setDraws(long losses) {
+    public void setDraws(long draws) {
         this.draws = draws;
-    }
-
-    public void addDraw() {
-        this.draws++;
     }
 
     public long getDraws() {

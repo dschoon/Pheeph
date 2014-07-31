@@ -93,6 +93,10 @@ public class User extends Model {
         this.deleted = deleted;
     }
 
+    public static User getUserById(long user_id) {
+        return User.find("SELECT u FROM User u WHERE u.id = ?", user_id).first();
+    }
+
     /*
      * This function is used in a Unit test
      */

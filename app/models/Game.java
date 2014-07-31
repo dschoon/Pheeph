@@ -126,8 +126,8 @@ public class Game extends Model {
     }
 
     public static int getGameCountByTeamId(long team_id) {
-        int homeGames = Game.find("COUNT(g) FROM Game g WHERE g.home_team_id = ?", team_id).first();
-        int awayGames = Game.find("COUNT(g) FROM Game g WHERE g.away_team_id = ?", team_id).first();
+        int homeGames = Game.find("SELECT g FROM Game g WHERE g.home_team_id = ?", team_id).fetch().size();
+        int awayGames = Game.find("SELECT g FROM Game g WHERE g.away_team_id = ?", team_id).fetch().size();
 
         return homeGames + awayGames;
     }

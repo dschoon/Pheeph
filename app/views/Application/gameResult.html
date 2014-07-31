@@ -19,6 +19,14 @@
             <center><img src="${awayTeam.logo_url}" style="width:150px;"></center>
         </div>
     </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="col-md-6">
+            <center><h5>${homeUser.name}</h5></center>
+        </div>
+        <div class="col-md-6">
+            <center><h5>${awayUser.name}</h5></center>
+        </div>
+    </div>
     <div class="row" style="margin-top:30px;">
         <div class="col-md-6">
             <center><input id="home_score" type="text" style="height:100px; width:100px; text-align:center; font-size:70px;"></center>
@@ -42,10 +50,23 @@
     </div>
     <div class="row" style="margin-top:60px;">
         <div class="col-md-6">
+            <center>${homeUser.name}</center>
+        </div>
+        <div class="col-md-6">
+            <center>${awayUser.name}</center>
+        </div>
+    </div>
+    <div class="row" style="margin-top:60px;">
+        <div class="col-md-6">
             <center><h1>${currentGame.home_score}</h1></center>
         </div>
         <div class="col-md-6">
             <center><h1>${currentGame.away_score}</h1></center>
+        </div>
+    </div>
+    <div class="row" style="margin-top:100px;">
+        <div class="col-md-12">
+            <center><span style="font-size:20px;"><strong>Date:</strong> ${gameTime}</span></center>
         </div>
     </div>
 #{/else}

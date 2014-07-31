@@ -9,7 +9,10 @@ import play.Logger;
 import play.data.validation.Required;
 import play.mvc.*;
 import securesocial.provider.SocialUser;
+import services.TeamStatsService;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -63,21 +66,32 @@ public class Application extends Controller {
         Team homeTeam = Team.getTeamById(currentGame.home_team_id);
         Team awayTeam = Team.getTeamById(currentGame.away_team_id);
 
+        User homeUser = User.getUserById(homeTeam.user_id);
+        User awayUser = User.getUserById(awayTeam.user_id);
+
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        Date gameDate = new Date(currentGame.getMatchDate());
+        String gameTime = df.format(gameDate);
+
         String title = homeTeam.name +" vs. " +awayTeam.name;
 
-        render(title, user, userModel, userTeam, currentGame, homeTeam, awayTeam);
+        render(title, user, userModel, userTeam, currentGame, homeTeam, awayTeam, homeUser, awayUser, gameTime);
     }
 
     public static void setGameResult(@Required long game_id, @Required long home_score, @Required long away_score) {
         Game currentGame = Game.getGameById(game_id);
 
+        long season_id = Team.getTeamById(currentGame.home_team_id).season_id;
+
         currentGame.setHomeScore(home_score);
         currentGame.setAwayScore(away_score);
         currentGame.setMatchDate(new Date().getTime());
         currentGame.setPlayed(true);
-
         currentGame.save();
 
-        renderJSON("{SUCCESS}");
+        TeamStatsService.updateStats(season_id, currentGame.home_team_id, currentGame.away_team_id,
+                                                currentGame.home_score, currentGame.away_score);
+
+        renderJSON("[{ \"result\":\"SUCCESS\" }]");
     }
 }

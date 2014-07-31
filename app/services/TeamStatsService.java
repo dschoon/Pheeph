@@ -14,17 +14,17 @@ public class TeamStatsService {
         TeamStats awayTeamStats = awayTeam.getTeamStatsByTeamAndSeasonId(away_team_id, season_id);
 
         if(home_score > away_score) {
-            homeTeamStats.addWin();
+            homeTeamStats.setWins(homeTeamStats.getWins() + 1);
+            awayTeamStats.setLosses(awayTeamStats.getLosses() + 1);
             homeTeamStats.addPoints(3);
-            awayTeamStats.addLoss();
         } else if(home_score < away_score){
-            homeTeamStats.addLoss();
-            awayTeamStats.addWin();
+            homeTeamStats.setLosses(homeTeamStats.getLosses() + 1);
+            awayTeamStats.setWins(awayTeamStats.getWins() + 1);
             awayTeamStats.addPoints(3);
         } else {
-            homeTeamStats.addDraw();
+            homeTeamStats.setDraws(homeTeamStats.getDraws() + 1);
             homeTeamStats.addPoints(1);
-            awayTeamStats.addDraw();
+            awayTeamStats.setDraws(awayTeamStats.getDraws() + 1);
             awayTeamStats.addPoints(1);
         }
 
@@ -37,13 +37,13 @@ public class TeamStatsService {
         awayTeamStats.setGoalsAgainst(awayTeamStats.getGoalsAgainst() + home_score);
 
         //Getting Home Team Counts
-        int team1HomeGameCount = Game.find("COUNT(g) FROM Game g WHERE g.home_user_id = ?", home_team_id).first();
-        int team1AwayGameCount = Game.find("COUNT(g) FROM Game g WHERE g.away_user_id = ?", home_team_id).first();
+        int team1HomeGameCount = Game.find("SELECT g FROM Game g WHERE g.home_team_id = ? AND g.played = '00000001'", home_team_id).fetch().size();
+        int team1AwayGameCount = Game.find("SELECT g FROM Game g WHERE g.away_team_id = ? AND g.played = '00000001'", home_team_id).fetch().size();
         int team1TotalGameCount = team1HomeGameCount + team1AwayGameCount;
 
         //Getting Away Team Counts
-        int team2HomeGameCount = Game.find("COUNT(g) FROM Game g WHERE g.home_user_id = ?", away_team_id).first();
-        int team2AwayGameCount = Game.find("COUNT(g) FROM Game g WHERE g.away_user_id = ?", away_team_id).first();
+        int team2HomeGameCount = Game.find("SELECT g FROM Game g WHERE g.home_team_id = ? AND g.played = '00000001'", away_team_id).fetch().size();
+        int team2AwayGameCount = Game.find("SELECT g FROM Game g WHERE g.away_team_id = ? AND g.played = '00000001'", away_team_id).fetch().size();
         int team2TotalGameCount = team2HomeGameCount + team2AwayGameCount;
 
         //Calculate the team's new "Points Per Match"

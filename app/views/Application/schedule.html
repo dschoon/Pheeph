@@ -20,7 +20,8 @@
                     <td><a href="/team/${game.away_team_id}">${game.getTeamById(game.away_team_id).name}</a></td>
                     #{if game.home_team_id != 0 && game.away_team_id != 0}
                         #{if game.played}<td><a href="/game/${game.id}"><button class="btn btn-primary" style="width:65px; height:25px; line-height:8px; font-size:12px;">View</button></a></td>#{/if}
-                        #{else}<td><a href="/game/${game.id}"><button class="btn btn-inverse" style="width:65px; height:25px; line-height:8px; font-size:12px;">Set</button></a></td>#{/else}
+                        #{elseif !game.played && userModel.isAdmin}<td><a href="/game/${game.id}"><button class="btn btn-inverse" style="width:65px; height:25px; line-height:8px; font-size:12px;">Set</button></a></td>#{/elseif}
+                        #{else}<td><button class="btn btn-inverse" style="width:65px; height:25px; line-height:8px; font-size:12px;">--</button></td>#{/else}
                     #{/if}
                     #{else}
                         <td>--</td>

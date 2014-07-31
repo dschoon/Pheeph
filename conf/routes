@@ -9,7 +9,7 @@ GET     /team/{team_id}                         Application.teamSchedule
 
 #Game Results
 GET     /game/{game_id}                         Application.gameResult
-GET     /game/{game_id}/set                     Application.setGameResult
+GET     /game/result/set                        Application.setGameResult
 
 # Login
 *       /auth                                   module:securesocial

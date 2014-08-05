@@ -139,7 +139,7 @@ public class TeamStats extends Model {
 
 
     public static List<TeamStats> getByRank() {
-        return TeamStats.find("SELECT ts FROM TeamStats ts ORDER BY ts.points DESC").fetch();
+        return TeamStats.find("SELECT ts FROM TeamStats ts ORDER BY ts.points DESC, ts.goal_differential DESC").fetch();
     }
 
 }

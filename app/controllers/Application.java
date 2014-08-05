@@ -20,7 +20,7 @@ import java.util.List;
 public class Application extends Controller {
 
     public static void home() {
-        String title = "Lithium Premier League";
+        String title = "Lithium Champions League";
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
         List<Team> teams = Team.findAll();

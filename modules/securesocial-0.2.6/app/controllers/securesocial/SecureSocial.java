@@ -15,6 +15,7 @@
 */
 package controllers.securesocial;
 
+import models.User;
 import play.Logger;
 import play.Play;
 import play.i18n.Messages;
@@ -173,7 +174,6 @@ public class SecureSocial extends Controller {
         flash.keep(ORIGINAL_URL);
         boolean userPassEnabled = ProviderRegistry.get(ProviderType.userpass) != null;
         render(providers, userPassEnabled);
-
     }
 
     /**
@@ -215,7 +215,23 @@ public class SecureSocial extends Controller {
         try {
             SocialUser user = provider.authenticate();
             setUserId(user);
-            originalUrl = flash.get(ORIGINAL_URL);
+
+            User incomingUser = User.find("byEmail", user.email).first();
+
+            if(incomingUser != null) {
+                incomingUser.setName(user.displayName);
+                incomingUser.setAvatarUrl(user.avatarUrl);
+                incomingUser.save();
+
+                Logger.debug("User " +user.displayName +" already exists. Loading from DB...");
+                originalUrl = flash.get(ORIGINAL_URL);
+            } else {
+                User newUser = new User(user.email, user.displayName, user.avatarUrl, user.lastAccess);
+                newUser.save();
+
+                Logger.debug("Creating User " +user.displayName +"...");
+                originalUrl = flash.get(ORIGINAL_URL);
+            }
         } catch ( Exception e ) {
             e.printStackTrace();
             Logger.error(e, "Error authenticating user");
@@ -225,6 +241,7 @@ public class SecureSocial extends Controller {
             flash.keep(ORIGINAL_URL);
             login();
         }
+
         final String redirectTo = Play.configuration.getProperty(SECURESOCIAL_LOGIN_REDIRECT, ROOT);
         redirect( originalUrl != null ? originalUrl : redirectTo);
     }

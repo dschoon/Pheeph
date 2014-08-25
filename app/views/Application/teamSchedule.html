@@ -5,6 +5,27 @@
     td .p {
         font-size:10px;
     }
+
+    .winFont {
+        color: #007f00;
+    }
+
+    .loseFont {
+        color: #f00;
+    }
+
+    .drawFont {
+        color: #666;
+    }
+
+    .gameStatus {
+        display: inline-block;
+        width: 1em;
+    }
+
+    .gameResultLink {
+        margin-left: 4px;
+    }
 </style>
 
 <div class="row">
@@ -35,7 +56,28 @@
                         <td><a href="/team/${game.home_team_id}">${game.getTeamById(game.home_team_id).name}</a></td>
                         <td><a href="/team/${game.away_team_id}">${game.getTeamById(game.away_team_id).name}</a></td>
                         #{if game.home_team_id != 0 && game.away_team_id != 0}
-                            #{if game.played}<td><a href="/game/${game.id}"><button class="btn btn-primary" style="width:65px; height:25px; line-height:8px; font-size:12px;">View</button></a></td>#{/if}
+                            #{if game.played}<td><a href="/game/${game.id}">
+                                #{if game.home_team_id == currentTeam.id}
+                                    #{set curr_team_score:game.home_score /}
+                                    #{set oppo_team_score:game.away_score /}
+                                #{/if}
+                                #{else}
+                                    #{set curr_team_score:game.away_score /}
+                                    #{set oppo_team_score:game.home_score /}
+                                #{/else}
+                                #{if curr_team_score > oppo_team_score}
+                                    <span class="winFont gameStatus">W</span>
+                                #{/if}
+                                #{elseif curr_team_score < oppo_team_score}
+                                    <span class="loseFont gameStatus">L</span>
+                                #{/elseif}
+                                #{else}
+                                    <span class="drawFont gameStatus">D</span>
+                                #{/else}
+                                <a class="gameResultLink" href="/game/${game.id}">
+                                    ${game.home_score} - ${game.away_score}
+                                </a></td>
+                            #{/if}
                             #{elseif !game.played && userModel.isAdmin}<td><a href="/game/${game.id}"><button class="btn btn-inverse" style="width:65px; height:25px; line-height:8px; font-size:12px;">Set</button></a></td>#{/elseif}
                             #{else}<td><button class="btn btn-inverse" style="width:65px; height:25px; line-height:8px; font-size:12px;">--</button></td>#{/else}
                         #{/if}

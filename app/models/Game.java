@@ -1,6 +1,5 @@
 package models;
 
-import org.bouncycastle.jce.provider.JCEBlockCipher;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 

@@ -6,6 +6,7 @@
 GET     /                                       Application.home
 GET     /schedule                               Application.schedule
 GET     /team/{team_id}                         Application.teamSchedule
+GET     /media/{video_index}                    MediaController.media
 
 #Game Results
 GET     /game/{game_id}                         Application.gameResult

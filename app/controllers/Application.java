@@ -5,7 +5,6 @@ import models.Game;
 import models.Team;
 import models.TeamStats;
 import models.User;
-import play.Logger;
 import play.data.validation.Required;
 import play.mvc.*;
 import securesocial.provider.SocialUser;

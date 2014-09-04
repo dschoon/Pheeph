@@ -1,0 +1,14 @@
+#{extends 'Application/index.html'/}
+#{set title: title /}
+
+<div class="row">
+    <div style="margin-bottom:-40px;"></div>
+    <div id="video-${video.id}" style="margin-top:40px;">
+        <center>
+            #{if video_index+1 > 1}<a href="/media/${video_index}"><img src="@{'/public/images/left.png'}" style="margin:-300px 0 0 -50px;" /></a>#{/if}
+            <iframe src="${video.source}" style="width:800px; height:500px; border-width:1px;" scrolling="no"></iframe>
+            #{if video_index+1 < results}<a href="/media/${video_index+2}"><img src="@{'/public/images/right.png'}" style="margin:-300px -50px 0 0;" /></a>#{/if}
+        </center>
+    </div>
+    <div style="font-size:20px; font-weight:bold; margin-top:40px;"><center>${video_index+1}</center></div>
+</div>

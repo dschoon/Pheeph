@@ -22,7 +22,7 @@ public class MediaController extends Controller  {
 
     public static void media(int video_index) {
         video_index = video_index-1;
-        String title = "Recent Videos";
+        String title = "Plays of the Week";
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
         Media video = getRecentMedia(RECENT_COUNT).get(video_index);

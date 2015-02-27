@@ -20,7 +20,7 @@
         </thead>
         <tbody>
             #{list items:teams, as:'team'}
-            #{if team.getTeamById(teamStats.get(team_index-1).team_id, season_id).id != 0}
+            #{if teamStats != null && team.getTeamById(teamStats.get(team_index-1).team_id, season_id).id != 0}
                 <tr #{if userModel != null && userModel.id == team.getTeamById(teamStats.get(team_index-1).team_id, season_id).user_id } style="background-color:#fff6d9" #{/if} >
                     <td><img src="${team.getTeamById(teamStats.get(team_index-1).team_id, season_id).logo_url}" width="15px"/></td>
                     <td>${team_index}</td>

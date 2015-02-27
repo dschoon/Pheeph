@@ -25,7 +25,7 @@ public class Application extends Controller {
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
         List<Team> teams = Team.findAll();
-        List<TeamStats> teamStats = TeamStats.getByRank();
+        List<TeamStats> teamStats = TeamStats.getByRank(season_id);
 
         renderArgs.put("userTeam", TeamController.getTeamByUserId(userModel.id));
         renderArgs.put("season_id", season_id);

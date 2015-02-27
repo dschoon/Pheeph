@@ -27,7 +27,7 @@ public class Application extends Controller {
         List<Team> teams = Team.findAll();
         List<TeamStats> teamStats = TeamStats.getByRank(season_id);
 
-        renderArgs.put("userTeam", TeamController.getTeamByUserId(userModel.id));
+        renderArgs.put("userTeam", TeamController.getTeamByUserId(userModel.id, season_id));
         renderArgs.put("season_id", season_id);
 
         render(title, user, userModel, teams, teamStats);
@@ -39,7 +39,7 @@ public class Application extends Controller {
         User userModel = User.find("byEmail", user.email).first();
         List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(10, season_id);
 
-        renderArgs.put("userTeam",TeamController.getTeamByUserId(userModel.id));
+        renderArgs.put("userTeam",TeamController.getTeamByUserId(userModel.id, season_id));
         renderArgs.put("season_id", season_id);
 
         render(title, user, userModel, weeks);
@@ -49,7 +49,7 @@ public class Application extends Controller {
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
 
-        Team userTeam = TeamController.getTeamByUserId(userModel.id);
+        Team userTeam = TeamController.getTeamByUserId(userModel.id, season_id);
         Team currentTeam = Team.getTeamById(team_id, season_id);
 
         List<Game> games = GameController.getGamesByTeamId(team_id);
@@ -64,7 +64,7 @@ public class Application extends Controller {
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
 
-        Team userTeam = TeamController.getTeamByUserId(userModel.id);
+        Team userTeam = TeamController.getTeamByUserId(userModel.id, season_id);
 
         Game currentGame = Game.getGameById(game_id);
         Team homeTeam = Team.getTeamById(currentGame.home_team_id, season_id);

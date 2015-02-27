@@ -38,7 +38,7 @@ public class MediaController extends Controller  {
         Date gameDate = new Date(game.getMatchDate());
         String gameTime = df.format(gameDate);
 
-        renderArgs.put("userTeam",TeamController.getTeamByUserId(userModel.id));
+        renderArgs.put("userTeam",TeamController.getTeamByUserId(userModel.id, season_id));
 
         render("Application/media.html", title, game, video, video_index, results, homeTeam, awayTeam, homeUser, awayUser, gameTime);
     }

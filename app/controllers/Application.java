@@ -28,8 +28,9 @@ public class Application extends Controller {
         List<TeamStats> teamStats = TeamStats.getByRank();
 
         renderArgs.put("userTeam", TeamController.getTeamByUserId(userModel.id));
+        renderArgs.put("season_id", season_id);
 
-        render(title, user, userModel, teams, teamStats, season_id);
+        render(title, user, userModel, teams, teamStats);
     }
 
     public static void schedule() {
@@ -39,11 +40,12 @@ public class Application extends Controller {
         List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(10, season_id);
 
         renderArgs.put("userTeam",TeamController.getTeamByUserId(userModel.id));
+        renderArgs.put("season_id", season_id);
 
-        render(title, user, userModel, weeks, season_id);
+        render(title, user, userModel, weeks);
     }
 
-    public static void teamSchedule(@Required long team_id, long season_id) {
+    public static void teamSchedule(@Required long team_id) {
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
 
@@ -51,13 +53,14 @@ public class Application extends Controller {
         Team currentTeam = Team.getTeamById(team_id, season_id);
 
         List<Game> games = GameController.getGamesByTeamId(team_id);
+        renderArgs.put("season_id", season_id);
 
         String title = currentTeam.getName();
 
-        render(title, user, userModel, userTeam, games, currentTeam, season_id);
+        render(title, user, userModel, userTeam, games, currentTeam);
     }
 
-    public static void gameResult(@Required long game_id, long season_id) {
+    public static void gameResult(@Required long game_id) {
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
 
@@ -73,10 +76,11 @@ public class Application extends Controller {
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         Date gameDate = new Date(currentGame.getMatchDate());
         String gameTime = df.format(gameDate);
+        renderArgs.put("season_id", season_id);
 
         String title = homeTeam.name +" vs. " +awayTeam.name;
 
-        render(title, user, userModel, userTeam, currentGame, homeTeam, awayTeam, homeUser, awayUser, gameTime, season_id);
+        render(title, user, userModel, userTeam, currentGame, homeTeam, awayTeam, homeUser, awayUser, gameTime);
     }
 
     public static void setGameResult(@Required long game_id, @Required long home_score, @Required long away_score, long season_id) {

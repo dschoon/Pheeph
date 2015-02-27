@@ -18,7 +18,7 @@ public class GameController extends CRUD {
     }
 
     public static List<Game> getAllGamesByWeek(long week) {
-        return Game.find("SELECT g FROM Game g WHERE g.week = ? and g.season_id = ?", week).fetch();
+        return Game.find("SELECT g FROM Game g WHERE g.week = ?", week).fetch();
     }
 
     public static List<List<Game>> getAllGamesForAllWeeks(int numOfWeeks) {

@@ -37,7 +37,7 @@ public class Application extends Controller {
         String title = "League Schedule";
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
-        List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(10, season_id);
+        List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(9, season_id);
 
         renderArgs.put("userTeam",TeamController.getTeamByUserId(userModel.id, season_id));
         renderArgs.put("season_id", season_id);
@@ -83,7 +83,7 @@ public class Application extends Controller {
         render(title, user, userModel, userTeam, currentGame, homeTeam, awayTeam, homeUser, awayUser, gameTime);
     }
 
-    public static void setGameResult(@Required long game_id, @Required long home_score, @Required long away_score, long season_id) {
+    public static void setGameResult(@Required long game_id, @Required long home_score, @Required long away_score, @Required long season_id) {
         Game currentGame = Game.getGameById(game_id);
 
         long seasonId = Team.getTeamById(currentGame.home_team_id, season_id).season_id;

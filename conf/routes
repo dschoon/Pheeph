@@ -10,7 +10,7 @@ GET     /season/{season_id}/media/{video_index}    MediaController.media
 
 #Game Results
 GET     /season/{season_id}/game/{game_id}         Application.gameResult
-GET     /season/{season_id}/game/result/set        Application.setGameResult
+GET     /game/result/set                           Application.setGameResult
 
 # Login
 *       /auth                                       module:securesocial

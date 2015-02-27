@@ -75,11 +75,12 @@
     saveResult = function() {
         var $homeScore = $("#home_score").val();
         var $awayScore = $("#away_score").val();
+        var $seasonId = '${season_id}';
 
         $.ajax({
             "url": "@{Application.setGameResult}",
             "dataType": "JSON",
-            "data": {"game_id":"${currentGame.id}", "home_score": $homeScore, "away_score": $awayScore, "season_id":"${season_id}" },
+            "data": {"game_id":"${currentGame.id}", "home_score": $homeScore, "away_score": $awayScore, "season_id":$seasonId },
             "type": "GET",
             "success": function (data) {
                 location.reload(true);

@@ -20,11 +20,11 @@
         </thead>
         <tbody>
             #{list items:teams, as:'team'}
-            #{if team.getTeamById(teamStats.get(team_index-1).team_id).id != 0}
-                <tr #{if userModel != null && userModel.id == team.getTeamById(teamStats.get(team_index-1).team_id).user_id } style="background-color:#fff6d9" #{/if} >
-                    <td><img src="${team.getTeamById(teamStats.get(team_index-1).team_id).logo_url}" width="15px"/></td>
+            #{if team.getTeamById(teamStats.get(team_index-1).team_id, season.id).id != 0}
+                <tr #{if userModel != null && userModel.id == team.getTeamById(teamStats.get(team_index-1).team_id, season.id).user_id } style="background-color:#fff6d9" #{/if} >
+                    <td><img src="${team.getTeamById(teamStats.get(team_index-1).team_id, season.id).logo_url}" width="15px"/></td>
                     <td>${team_index}</td>
-                    <td><a href="/season/${season.id}/team/${team.getTeamById(teamStats.get(team_index-1).team_id).id}">${team.getTeamById(teamStats.get(team_index-1).team_id).name}</a></td>
+                    <td><a href="/season/${season.id}/team/${team.getTeamById(teamStats.get(team_index-1).team_id, season.id).id}">${team.getTeamById(teamStats.get(team_index-1).team_id, season.id).name}</a></td>
                     <td>${teamStats.get(team_index-1).wins}</td>
                     <td>${teamStats.get(team_index-1).losses}</td>
                     <td>${teamStats.get(team_index-1).draws}</td>

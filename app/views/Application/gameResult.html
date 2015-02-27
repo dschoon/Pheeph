@@ -79,7 +79,7 @@
         $.ajax({
             "url": "@{Application.setGameResult}",
             "dataType": "JSON",
-            "data": {"game_id":"${currentGame.id}", "home_score": $homeScore, "away_score": $awayScore},
+            "data": {"game_id":"${currentGame.id}", "home_score": $homeScore, "away_score": $awayScore, "season_id": $season_id},
             "type": "GET",
             "success": function (data) {
                 location.reload(true);

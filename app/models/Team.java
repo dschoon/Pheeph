@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import java.util.List;
 
 /**
  * User: daniel.schoonmaker
@@ -66,6 +67,10 @@ public class Team extends Model {
 
     public static Team getTeamById(long team_id, long season_id) {
         return Team.find("SELECT t FROM Team t WHERE t.id = ? and t.season_id = ?", team_id, season_id).first();
+    }
+
+    public static List<Team> getAllTeamsForSeason(long season_id) {
+        return Team.find("SELECT t FROM Team t WHERE t.season_id = ?", season_id).fetch();
     }
 
     public void setName(String name) {

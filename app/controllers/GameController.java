@@ -17,15 +17,15 @@ public class GameController extends CRUD {
         return Game.findAll();
     }
 
-    public static List<Game> getAllGamesByWeek(long week, long season_id) {
-        return Game.find("SELECT g FROM Game g WHERE g.week = ? and g.season_id = ?", week, season_id).fetch();
+    public static List<Game> getAllGamesByWeek(long week) {
+        return Game.find("SELECT g FROM Game g WHERE g.week = ? and g.season_id = ?", week).fetch();
     }
 
-    public static List<List<Game>> getAllGamesForAllWeeks(int numOfWeeks, long season_id) {
+    public static List<List<Game>> getAllGamesForAllWeeks(int numOfWeeks) {
         List<List<Game>> allWeeks = new ArrayList<List<Game>>();
 
         for(int i = 0; i <= numOfWeeks; i++) {
-            List<Game> allGames = getAllGamesByWeek(i+1, season_id);
+            List<Game> allGames = getAllGamesByWeek(i+1);
             allWeeks.add(i, allGames);
         }
 

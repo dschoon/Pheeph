@@ -24,7 +24,7 @@ public class Application extends Controller {
         String title = "Lithium Champions League";
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
-        List<Team> teams = Team.findAll();
+        List<Team> teams = Team.getAllTeamsForSeason(season_id);
         List<TeamStats> teamStats = TeamStats.getByRank(season_id);
 
         renderArgs.put("userTeam", TeamController.getTeamByUserId(userModel.id, season_id));
@@ -37,7 +37,7 @@ public class Application extends Controller {
         String title = "League Schedule";
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
-        List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(10, season_id);
+        List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(10);
 
         renderArgs.put("userTeam",TeamController.getTeamByUserId(userModel.id, season_id));
         renderArgs.put("season_id", season_id);

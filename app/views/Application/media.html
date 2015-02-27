@@ -5,38 +5,38 @@
     <div style="margin-bottom:-40px;"></div>
     <div id="video-${video.id}" style="margin-top:40px;">
         <center>
-            #{if video_index+1 > 1}<a href="/media/${video_index}"><img src="@{'/public/images/left.png'}" style="margin:-300px 0 0 -50px;" /></a>#{/if}
+            #{if video_index+1 > 1}<a href="/season/${season.id}/media/${video_index}"><img src="@{'/public/images/left.png'}" style="margin:-300px 0 0 -50px;" /></a>#{/if}
             <iframe src="${video.source}" style="width:800px; height:500px; border-width:1px;" scrolling="no"></iframe>
-            #{if video_index+1 < results}<a href="/media/${video_index+2}"><img src="@{'/public/images/right.png'}" style="margin:-300px -50px 0 0;" /></a>#{/if}
+            #{if video_index+1 < results}<a href="/season/${season.id}/media/${video_index+2}"><img src="@{'/public/images/right.png'}" style="margin:-300px -50px 0 0;" /></a>#{/if}
         </center>
     </div>
     <div class="row" style="margin-top:30px;">
         <div class="col-md-6">
-            <center><a href="/team/${homeTeam.id}"><img src="${homeTeam.logo_url}" style="width:50px;"></a></center>
+            <center><a href="/season/${season.id}/team/${homeTeam.id}"><img src="${homeTeam.logo_url}" style="width:50px;"></a></center>
         </div>
         <div class="col-md-6">
-            <center><a href="/team/${awayTeam.id}"><img src="${awayTeam.logo_url}" style="width:50px;"></a></center>
-        </div>
-    </div>
-    <div class="row" style="margin-top:20px;">
-        <div class="col-md-6">
-            <center><a href="/team/${homeTeam.id}"><strong>${homeUser.name}</strong></a></center>
-        </div>
-        <div class="col-md-6">
-            <center><a href="/team/${awayTeam.id}"><strong>${awayUser.name}</strong></a></center>
+            <center><a href="/season/${season.id}/team/${awayTeam.id}"><img src="${awayTeam.logo_url}" style="width:50px;"></a></center>
         </div>
     </div>
     <div class="row" style="margin-top:20px;">
         <div class="col-md-6">
-            <center><a href="/game/${game.id}"><h5>${game.home_score}</h5></a></center>
+            <center><a href="/season/${season.id}/team/${homeTeam.id}"><strong>${homeUser.name}</strong></a></center>
         </div>
         <div class="col-md-6">
-            <center><a href="/game/${game.id}"><h5>${game.away_score}</h5></a></center>
+            <center><a href="/season/${season.id}/team/${awayTeam.id}"><strong>${awayUser.name}</strong></a></center>
+        </div>
+    </div>
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-6">
+            <center><a href="/season/${season.id}/game/${game.id}"><h5>${game.home_score}</h5></a></center>
+        </div>
+        <div class="col-md-6">
+            <center><a href="/season/${season.id}/game/${game.id}"><h5>${game.away_score}</h5></a></center>
         </div>
     </div>
     <div class="row" style="margin:30px 0 40px 0;">
         <div class="col-md-12">
-            <center><span style="font-size:12px;"><a href="/game/${game.id}"><strong>Date:</strong> ${gameTime}</a></span></center>
+            <center><span style="font-size:12px;"><a href="/season/${season.id}/game/${game.id}"><strong>Date:</strong> ${gameTime}</a></span></center>
         </div>
     </div>
 </div>

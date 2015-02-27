@@ -53,10 +53,10 @@
                     <tbody>
                     <tr>
                         <td>${game.week}</td>
-                        <td><a href="/team/${game.home_team_id}">${game.getTeamById(game.home_team_id).name}</a></td>
-                        <td><a href="/team/${game.away_team_id}">${game.getTeamById(game.away_team_id).name}</a></td>
+                        <td><a href="/season/${season.id}/team/${game.home_team_id}">${game.getTeamById(game.home_team_id).name}</a></td>
+                        <td><a href="/season/${season.id}/team/${game.away_team_id}">${game.getTeamById(game.away_team_id).name}</a></td>
                         #{if game.home_team_id != 0 && game.away_team_id != 0}
-                            #{if game.played}<td><a href="/game/${game.id}">
+                            #{if game.played}<td><a href="season/${season.id}/game/${game.id}">
                                 #{if game.home_team_id == currentTeam.id}
                                     #{set curr_team_score:game.home_score /}
                                     #{set oppo_team_score:game.away_score /}
@@ -74,11 +74,11 @@
                                 #{else}
                                     <span class="drawFont gameStatus">D</span>
                                 #{/else}
-                                <a class="gameResultLink" href="/game/${game.id}">
+                                <a class="gameResultLink" href="/season/${season.id}/game/${game.id}">
                                     ${game.home_score} - ${game.away_score}
                                 </a></td>
                             #{/if}
-                            #{elseif !game.played && userModel.isAdmin}<td><a href="/game/${game.id}"><button class="btn btn-inverse" style="width:65px; height:25px; line-height:8px; font-size:12px;">Set</button></a></td>#{/elseif}
+                            #{elseif !game.played && userModel.isAdmin}<td><a href="/season/${season.id}/game/${game.id}"><button class="btn btn-inverse" style="width:65px; height:25px; line-height:8px; font-size:12px;">Set</button></a></td>#{/elseif}
                             #{else}<td><button class="btn btn-inverse" style="width:65px; height:25px; line-height:8px; font-size:12px;">--</button></td>#{/else}
                         #{/if}
                         #{else}

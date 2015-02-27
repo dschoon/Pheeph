@@ -20,7 +20,7 @@ public class MediaController extends Controller  {
 
     final static private int RECENT_COUNT = 5;
 
-    public static void media(int video_index) {
+    public static void media(int video_index, long season_id) {
         video_index = video_index-1;
         String title = "Plays of the Week";
         SocialUser user = SecureSocial.getCurrentUser();
@@ -29,8 +29,8 @@ public class MediaController extends Controller  {
         int results = getRecentMedia(RECENT_COUNT).size();
 
         Game game = Game.getGameById(video.game_id);
-        Team homeTeam = Team.getTeamById(game.home_team_id);
-        Team awayTeam = Team.getTeamById(game.away_team_id);
+        Team homeTeam = Team.getTeamById(game.home_team_id, season_id);
+        Team awayTeam = Team.getTeamById(game.away_team_id, season_id);
         User homeUser = User.getUserById(homeTeam.user_id);
         User awayUser = User.getUserById(awayTeam.user_id);
 

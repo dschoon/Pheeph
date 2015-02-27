@@ -64,8 +64,8 @@ public class Team extends Model {
         return TeamStats.find("SELECT ts FROM TeamStats ts WHERE ts.team_id = ? and ts.season_id = ?", team_id, season_id).first();
     }
 
-    public static Team getTeamById(long team_id) {
-        return Team.find("SELECT t FROM Team t WHERE t.id = ?", team_id).first();
+    public static Team getTeamById(long team_id, long season_id) {
+        return Team.find("SELECT t FROM Team t WHERE t.id = ? and ts.season_id = ?", team_id, season_id).first();
     }
 
     public void setName(String name) {

@@ -18,6 +18,8 @@ import java.util.List;
 @With(SecureSocial.class)
 public class Application extends Controller {
 
+    public static long season_id = 2;
+
     public static void home() {
         String title = "Lithium Champions League";
         SocialUser user = SecureSocial.getCurrentUser();
@@ -27,43 +29,43 @@ public class Application extends Controller {
 
         renderArgs.put("userTeam", TeamController.getTeamByUserId(userModel.id));
 
-        render(title, user, userModel, teams, teamStats);
+        render(title, user, userModel, teams, teamStats, season_id);
     }
 
     public static void schedule() {
         String title = "League Schedule";
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
-        List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(16);
+        List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(10);
 
         renderArgs.put("userTeam",TeamController.getTeamByUserId(userModel.id));
 
-        render(title, user, userModel, weeks);
+        render(title, user, userModel, weeks, season_id);
     }
 
-    public static void teamSchedule(@Required long team_id) {
+    public static void teamSchedule(@Required long team_id, long season_id) {
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
 
         Team userTeam = TeamController.getTeamByUserId(userModel.id);
-        Team currentTeam = Team.getTeamById(team_id);
+        Team currentTeam = Team.getTeamById(team_id, season_id);
 
         List<Game> games = GameController.getGamesByTeamId(team_id);
 
         String title = currentTeam.getName();
 
-        render(title, user, userModel, userTeam, games, currentTeam);
+        render(title, user, userModel, userTeam, games, currentTeam, season_id);
     }
 
-    public static void gameResult(@Required long game_id) {
+    public static void gameResult(@Required long game_id, long season_id) {
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
 
         Team userTeam = TeamController.getTeamByUserId(userModel.id);
 
         Game currentGame = Game.getGameById(game_id);
-        Team homeTeam = Team.getTeamById(currentGame.home_team_id);
-        Team awayTeam = Team.getTeamById(currentGame.away_team_id);
+        Team homeTeam = Team.getTeamById(currentGame.home_team_id, season_id);
+        Team awayTeam = Team.getTeamById(currentGame.away_team_id, season_id);
 
         User homeUser = User.getUserById(homeTeam.user_id);
         User awayUser = User.getUserById(awayTeam.user_id);
@@ -74,13 +76,13 @@ public class Application extends Controller {
 
         String title = homeTeam.name +" vs. " +awayTeam.name;
 
-        render(title, user, userModel, userTeam, currentGame, homeTeam, awayTeam, homeUser, awayUser, gameTime);
+        render(title, user, userModel, userTeam, currentGame, homeTeam, awayTeam, homeUser, awayUser, gameTime, season_id);
     }
 
-    public static void setGameResult(@Required long game_id, @Required long home_score, @Required long away_score) {
+    public static void setGameResult(@Required long game_id, @Required long home_score, @Required long away_score, long season_id) {
         Game currentGame = Game.getGameById(game_id);
 
-        long season_id = Team.getTeamById(currentGame.home_team_id).season_id;
+        long seasonId = Team.getTeamById(currentGame.home_team_id, season_id).season_id;
 
         currentGame.setHomeScore(home_score);
         currentGame.setAwayScore(away_score);
@@ -88,7 +90,7 @@ public class Application extends Controller {
         currentGame.setPlayed(true);
         currentGame.save();
 
-        TeamStatsService.updateStats(season_id, currentGame.home_team_id, currentGame.away_team_id,
+        TeamStatsService.updateStats(seasonId, currentGame.home_team_id, currentGame.away_team_id,
                                                 currentGame.home_score, currentGame.away_score);
 
         renderJSON("[{ \"result\":\"SUCCESS\" }]");

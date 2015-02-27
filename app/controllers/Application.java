@@ -33,7 +33,7 @@ public class Application extends Controller {
         render(title, user, userModel, teams, teamStats);
     }
 
-    public static void schedule() {
+    public static void schedule(@Required long season_id) {
         String title = "League Schedule";
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
@@ -45,7 +45,7 @@ public class Application extends Controller {
         render(title, user, userModel, weeks);
     }
 
-    public static void teamSchedule(@Required long team_id) {
+    public static void teamSchedule(@Required long team_id, @Required long season_id) {
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
 
@@ -60,7 +60,7 @@ public class Application extends Controller {
         render(title, user, userModel, userTeam, games, currentTeam);
     }
 
-    public static void gameResult(@Required long game_id) {
+    public static void gameResult(@Required long game_id, @Required long season_id) {
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
 

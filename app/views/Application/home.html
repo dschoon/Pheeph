@@ -20,21 +20,23 @@
         </thead>
         <tbody>
             #{list items:teams, as:'team'}
-            #{if teamStats != null && team.getTeamById(teamStats.get(team_index-1).team_id, season_id).id != 0}
-                <tr #{if userModel != null && userModel.id == team.getTeamById(teamStats.get(team_index-1).team_id, season_id).user_id } style="background-color:#fff6d9" #{/if} >
-                    <td><img src="${team.getTeamById(teamStats.get(team_index-1).team_id, season_id).logo_url}" width="15px"/></td>
-                    <td>${team_index}</td>
-                    <td><a href="/season/${season_id}/team/${team.getTeamById(teamStats.get(team_index-1).team_id, season_id).id}">${team.getTeamById(teamStats.get(team_index-1).team_id, season_id).name}</a></td>
-                    <td>${teamStats.get(team_index-1).wins}</td>
-                    <td>${teamStats.get(team_index-1).losses}</td>
-                    <td>${teamStats.get(team_index-1).draws}</td>
-                    <td>${teamStats.get(team_index-1).points}</td>
-                    <td>${teamStats.get(team_index-1).pointsPerMatch}</td>
-                    <td>${teamStats.get(team_index-1).goalsFor}</td>
-                    <td>${teamStats.get(team_index-1).goalsAgainst}</td>
-                    <td>${teamStats.get(team_index-1).goalDifferential}</td>
-                </tr>
-            #{/if}
+                #{if teamStats != null}
+                    #{if team.getTeamById(teamStats.get(team_index-1).team_id, season_id).id != 0}
+                        <tr #{if userModel != null && userModel.id == team.getTeamById(teamStats.get(team_index-1).team_id, season_id).user_id } style="background-color:#fff6d9" #{/if} >
+                            <td><img src="${team.getTeamById(teamStats.get(team_index-1).team_id, season_id).logo_url}" width="15px"/></td>
+                            <td>${team_index}</td>
+                            <td><a href="/season/${season_id}/team/${team.getTeamById(teamStats.get(team_index-1).team_id, season_id).id}">${team.getTeamById(teamStats.get(team_index-1).team_id, season_id).name}</a></td>
+                            <td>${teamStats.get(team_index-1).wins}</td>
+                            <td>${teamStats.get(team_index-1).losses}</td>
+                            <td>${teamStats.get(team_index-1).draws}</td>
+                            <td>${teamStats.get(team_index-1).points}</td>
+                            <td>${teamStats.get(team_index-1).pointsPerMatch}</td>
+                            <td>${teamStats.get(team_index-1).goalsFor}</td>
+                            <td>${teamStats.get(team_index-1).goalsAgainst}</td>
+                            <td>${teamStats.get(team_index-1).goalDifferential}</td>
+                        </tr>
+                    #{/if}
+                #{/if}
             #{/list}
         </tbody>
     </table>

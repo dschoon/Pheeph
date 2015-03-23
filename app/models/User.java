@@ -1,6 +1,7 @@
 package models;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 import play.data.validation.Email;
@@ -95,6 +96,10 @@ public class User extends Model {
 
     public static User getUserById(long user_id) {
         return User.find("SELECT u FROM User u WHERE u.id = ?", user_id).first();
+    }
+
+    public static List<User> getAllUsers() {
+        return User.find("SELECT u FROM User u").fetch();
     }
 
     /*

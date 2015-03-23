@@ -4,6 +4,7 @@
 
 # Home page
 GET     /                                          Application.home
+GET     /season/{season_id}/standings              Application.standings
 GET     /season/{season_id}/schedule               Application.schedule
 GET     /season/{season_id}/team/{team_id}         Application.teamSchedule
 GET     /season/{season_id}/media/{video_index}    MediaController.media

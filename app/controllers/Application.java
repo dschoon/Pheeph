@@ -2,6 +2,7 @@ package controllers;
 
 import controllers.securesocial.SecureSocial;
 import models.Game;
+import models.Season;
 import models.Team;
 import models.TeamStats;
 import models.User;
@@ -18,10 +19,23 @@ import java.util.List;
 @With(SecureSocial.class)
 public class Application extends Controller {
 
-    public static long season_id = 2;
+    public static long season_id;
 
     public static void home() {
         String title = "Lithium Champions League";
+        SocialUser user = SecureSocial.getCurrentUser();
+        User userModel = User.find("byEmail", user.email).first();
+        List<Season> seasons = Season.getAllSeasons();
+        season_id = seasons.size();
+
+        renderArgs.put("userTeam", TeamController.getTeamByUserId(userModel.id, season_id));
+        renderArgs.put("season_id", season_id);
+
+        render(title, user, userModel, seasons);
+    }
+
+    public static void standings() {
+        String title = "League Standings";
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
         List<Team> teams = Team.getAllTeamsForSeason(season_id);
@@ -37,7 +51,7 @@ public class Application extends Controller {
         String title = "League Schedule";
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
-        List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(9, season_id);
+        List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(13, season_id);
 
         renderArgs.put("userTeam",TeamController.getTeamByUserId(userModel.id, season_id));
         renderArgs.put("season_id", season_id);

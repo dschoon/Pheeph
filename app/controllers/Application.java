@@ -50,7 +50,9 @@ public class Application extends Controller {
         String title = "League Schedule";
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();
-        List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(13, season_id);
+
+        Season season = Season.getSeasonById(season_id);
+        List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(season.getWeekCount()-1, season_id);
 
         renderArgs.put("userTeam",TeamController.getTeamByUserId(userModel.id, season_id));
         renderArgs.put("season_id", season_id);

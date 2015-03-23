@@ -1,8 +1,72 @@
-#{extends 'Application/index.html'/}
-#{set title: title /}
+<!DOCTYPE html>
 
-<div>
-    <center><a href="/season/1/standings"><button type="button" class="btn btn-success">Season 1 (July 2014)</button></a></center>
-    <center><a href="/season/2/standings"><button type="button" class="btn btn-success">Season 2 (March 2015)</button></a></center>
-    <center><a href="/season/3/standings"><button type="button" class="btn btn-success">Season 3 (April 2015)</button></a></center>
+<html>
+<head>
+    <title>#{get 'title' /}</title>
+    <meta charset="${_response_encoding}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="@{'/public/bootstrap/css/bootstrap.min.css'}">
+    <link rel="stylesheet" href="@{'/public/css/flat-ui.css'}" >
+
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/soccer-ball.png'}"/>
+
+#{get 'moreStyles' /}
+    <style xmlns="http://www.w3.org/1999/html">
+        body {
+            background-color: #2C3E50;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        a {
+            color: #2C3E50;
+        }
+        #avatar {
+            border-color: #2C3E50;
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 5px;
+        }
+    </style>
+#{get 'moreScripts' /}
+</head>
+<body>
+
+<div class="container" style="padding-top:20px;">
+    <div>
+        <div id="titleDiv" class="col-md-12">
+            <div class="jumbotron span5" style="background-color:#FFF;">
+                <center>
+                    <h1 id="title"><a href="/">${title}</a></h1>
+                </center>
+            </div>
+        </div>
+
+        <div class="col-md-12" style="margin-top:-25px;">
+            <div class="jumbotron" style="background-color:#FFF; min-height:400px;">
+                <div style="margin-top:60px;">
+                    <div>
+                        <center><a href="/season/1/standings"><button type="button" class="btn btn-success" style="margin-top:30px;">Season 1 (July 2014)</button></a></center>
+                        <center><a href="/season/2/standings"><button type="button" class="btn btn-success" style="margin-top:30px;">Season 2 (March 2015)</button></a></center>
+                        <center><a href="/season/3/standings"><button type="button" class="btn btn-success" style="margin-top:30px;">Season 3 (April 2015)</button></a></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="@{'/public/js/jquery-ui-1.10.3.custom.min.js'}"></script>
+<script src="@{'/public/js/jquery.ui.touch-punch.min.js'}"></script>
+<script src="@{'/public/js/bootstrap.min.js'}"></script>
+<script src="@{'/public/js/bootstrap-select.js'}"></script>
+<script src="@{'/public/js/bootstrap-switch.js'}"></script>
+<script src="@{'/public/js/flatui-checkbox.js'}"></script>
+<script src="@{'/public/js/flatui-radio.js'}"></script>
+<script src="@{'/public/js/jquery.tagsinput.js'}"></script>
+<script src="@{'/public/js/jquery.placeholder.js'}"></script>
+<script src="http://vjs.zencdn.net/4.3/video.js"></script>
+<script src="@{'/public/js/application.js'}"></script>
+</body>
+</html>

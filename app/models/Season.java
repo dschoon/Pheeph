@@ -70,4 +70,8 @@ public class Season extends Model {
     public static List<Season> getAllSeasons() {
         return Season.find("SELECT s FROM Season s").fetch();
     }
+
+    public static Season getSeasonById(long season_id) {
+        return Season.find("SELECT s FROM Season s WHERE s.season_id = ?", season_id).first();
+    }
 }

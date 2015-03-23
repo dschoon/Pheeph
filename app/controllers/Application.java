@@ -29,12 +29,11 @@ public class Application extends Controller {
         season_id = seasons.size();
 
         renderArgs.put("userTeam", TeamController.getTeamByUserId(userModel.id, season_id));
-        renderArgs.put("season_id", season_id);
 
         render(title, user, userModel, seasons);
     }
 
-    public static void standings() {
+    public static void standings(@Required long season_id) {
         String title = "League Standings";
         SocialUser user = SecureSocial.getCurrentUser();
         User userModel = User.find("byEmail", user.email).first();

@@ -23,7 +23,7 @@ public class Season extends Model {
 
     @Required
     @Column(name = "week_count")
-    public long week_count;
+    public int week_count;
 
     @Required
     @Column(name = "name")
@@ -51,11 +51,11 @@ public class Season extends Model {
         return team_count;
     }
 
-    public void setWeekCount(long week_count) {
+    public void setWeekCount(int week_count) {
         this.week_count = week_count;
     }
 
-    public long getWeekCount() {
+    public int getWeekCount() {
         return week_count;
     }
 

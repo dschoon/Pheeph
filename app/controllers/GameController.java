@@ -21,7 +21,7 @@ public class GameController extends CRUD {
         return Game.find("SELECT g FROM Game g WHERE g.week = ? and season_id = ?", week, season_id).fetch();
     }
 
-    public static List<List<Game>> getAllGamesForAllWeeks(long numOfWeeks, long season_id) {
+    public static List<List<Game>> getAllGamesForAllWeeks(int numOfWeeks, long season_id) {
         List<List<Game>> allWeeks = new ArrayList<List<Game>>();
 
         for(int i = 0; i <= numOfWeeks; i++) {

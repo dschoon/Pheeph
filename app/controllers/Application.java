@@ -6,6 +6,7 @@ import models.Season;
 import models.Team;
 import models.TeamStats;
 import models.User;
+import play.Logger;
 import play.data.validation.Required;
 import play.mvc.*;
 import securesocial.provider.SocialUser;
@@ -52,6 +53,7 @@ public class Application extends Controller {
         User userModel = User.find("byEmail", user.email).first();
 
         Season season = Season.getSeasonById(season_id);
+        Logger.error("" + (season.getWeekCount() - 1));
         List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(season.getWeekCount()-1, season_id);
 
         renderArgs.put("userTeam",TeamController.getTeamByUserId(userModel.id, season_id));

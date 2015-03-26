@@ -16,9 +16,9 @@
             </thead>
             <tbody>
                 #{list items:weeks.get(week_index-1), as:'game'}
-                <tr #{if userModel.id == game.getTeamById(game.home_team_id).user_id || userModel.id == game.getTeamById(game.away_team_id).user_id } style="background-color:#fff6d9" #{/if}>
+                <tr #{if userModel != null && (userModel.id == game.getTeamById(game.home_team_id).user_id || userModel.id == game.getTeamById(game.away_team_id).user_id) } style="background-color:#fff6d9" #{/if}>
                     <td><a href="/season/${season_id}/team/${game.home_team_id}">${game.getTeamById(game.home_team_id).name}</a></td>
-                    <td><a href="/season/${season_id}/team/${game.home_team_id}">v</td>
+                    <td>v</td>
                     <td><a href="/season/${season_id}/team/${game.away_team_id}">${game.getTeamById(game.away_team_id).name}</a></td>
                     #{if game.home_team_id != 0 && game.away_team_id != 0}
                         #{if game.played}<td><a href="/season/${season_id}/game/${game.id}"><button class="btn btn-primary" style="width:65px; height:25px; line-height:8px; font-size:12px;">View</button></a></td>#{/if}

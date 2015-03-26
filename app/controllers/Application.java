@@ -53,8 +53,9 @@ public class Application extends Controller {
         User userModel = User.find("byEmail", user.email).first();
 
         Season season = Season.getSeasonById(season_id);
-        Logger.error("" + (season.getWeekCount() - 1));
+        Logger.error("Season ID: " + season_id);
         List<List<Game>> weeks = GameController.getAllGamesForAllWeeks(season.getWeekCount()-1, season_id);
+        Logger.error("Week Size: " + weeks.size());
 
         renderArgs.put("userTeam",TeamController.getTeamByUserId(userModel.id, season_id));
         renderArgs.put("season_id", season_id);
